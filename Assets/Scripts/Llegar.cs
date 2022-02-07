@@ -1,12 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace UCM.IAV.Movimiento
 {
 
     /// <summary>
-    /// Clase para modelar el comportamiento de SEGUIR a otro agente
+    /// Clase para modelar el comportamiento de Llegar a otro agente
     /// </summary>
     public class Llegar : ComportamientoAgente
     {
