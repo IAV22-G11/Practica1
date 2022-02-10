@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7836756342179888338}
   - component: {fileID: 7836756342179888339}
-  - component: {fileID: 7836756342179888340}
+  - component: {fileID: 3487858929298508822}
   m_Layer: 0
   m_Name: Rata
   m_TagString: Untagged
@@ -49,8 +49,8 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!135 &7836756342179888340
-SphereCollider:
+--- !u!65 &3487858929298508822
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -60,8 +60,8 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.29301345
-  m_Center: {x: 0, y: -0.20698655, z: 0}
+  m_Size: {x: 0.24280834, y: 0.5087302, z: 0.63323045}
+  m_Center: {x: -0.032357693, y: -0.24563491, z: 0.005824685}
 --- !u!1 &7836756342244075787
 GameObject:
   m_ObjectHideFlags: 0

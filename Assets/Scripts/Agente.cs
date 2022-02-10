@@ -8,17 +8,19 @@
    Autor: Federico Peinado 
    Contacto: email@federicopeinado.com
 */
-namespace UCM.IAV.Movimiento {
+namespace UCM.IAV.Movimiento
+{
 
     using System;
     using System.Collections;
     using System.Collections.Generic;
-    using UnityEngine; 
+    using UnityEngine;
 
-/// <summary>
-/// La clase Agente es responsable de modelar los agentes y gestionar todos los comportamientos asociados para combinarlos (si es posible) 
-/// </summary>
-    public class Agente : MonoBehaviour {
+    /// <summary>
+    /// La clase Agente es responsable de modelar los agentes y gestionar todos los comportamientos asociados para combinarlos (si es posible) 
+    /// </summary>
+    public class Agente : MonoBehaviour
+    {
         /// <summary>
         /// Combinar por peso
         /// </summary>
@@ -109,12 +111,12 @@ namespace UCM.IAV.Movimiento {
         /// </summary>
         public virtual void FixedUpdate()
         {
-            if (cuerpoRigido.isKinematic)
+            if (cuerpoRigido == null)
                 return; // El movimiento será cinemático, fotograma a fotograma con Update
 
             // Limitamos la aceleración al máximo que acepta este agente (aunque normalmente vendrá ya limitada)
             if (direccion.lineal.sqrMagnitude > aceleracionMax)
-                direccion.lineal = direccion.lineal.normalized * aceleracionMax; 
+                direccion.lineal = direccion.lineal.normalized * aceleracionMax;
 
             // La opción por defecto sería usar ForceMode.Force, pero eso implicaría que el comportamiento de dirección tuviese en cuenta la masa a la hora de calcular la aceleración que se pide
             cuerpoRigido.AddForce(direccion.lineal, ForceMode.Acceleration);
@@ -125,19 +127,19 @@ namespace UCM.IAV.Movimiento {
 
             // Rotamos el objeto siempre sobre su eje Y (hacia arriba), asumiendo que el agente está sobre un plano y quiere mirar a un lado o a otro
             // La opción por defecto sería usar ForceMode.Force, pero eso implicaría que el comportamiento de dirección tuviese en cuenta la masa a la hora de calcular la aceleración que se pide
-            cuerpoRigido.AddTorque(transform.up * direccion.angular, ForceMode.Acceleration);  
+            cuerpoRigido.AddTorque(transform.up * direccion.angular, ForceMode.Acceleration);
 
-            /* El tema de la orientación, descomentarlo si queremos sobreescribir toda la cuestión de la velocidad angular
-            orientacion += rotacion / Time.deltaTime; // En lugar de * he puesto / para así calcular la aceleración, que es lo que debe ir aquí
-            // Necesitamos "constreñir" inteligentemente la orientación al rango (0, 360)
-            if (orientacion < 0.0f)
-                orientacion += 360.0f;
-            else if (orientacion > 360.0f)
-                orientacion -= 360.0f;
+            ////El tema de la orientación, descomentarlo si queremos sobreescribir toda la cuestión de la velocidad angular
+            //orientacion += rotacion / Time.deltaTime; // En lugar de * he puesto / para así calcular la aceleración, que es lo que debe ir aquí
+            //// Necesitamos "constreñir" inteligentemente la orientación al rango (0, 360)
+            //if (orientacion < 0.0f)
+            //    orientacion += 360.0f;
+            //else if (orientacion > 360.0f)
+            //    orientacion -= 360.0f;
 
-            Vector3 orientationVector = OriToVec(orientacion);
-            cuerpoRigido.rotation = Quaternion.LookRotation(orientationVector, Vector3.up);
-            */
+            //Vector3 orientationVector = OriToVec(orientacion);
+            //cuerpoRigido.rotation = Quaternion.LookRotation(orientationVector, Vector3.up);
+
 
             // Aunque también se controlen los máximos en el LateUpdate, entiendo que conviene también hacerlo aquí, en FixedUpdate, que puede llegar a ejecutarse más veces
 
@@ -150,6 +152,11 @@ namespace UCM.IAV.Movimiento {
                 cuerpoRigido.angularVelocity = cuerpoRigido.angularVelocity.normalized * rotacionMax;
             if (cuerpoRigido.angularVelocity.magnitude < -rotacionMax)
                 cuerpoRigido.angularVelocity = cuerpoRigido.angularVelocity.normalized * -rotacionMax;
+
+            //Con esto mira siempre a donde anda de velocidad
+            transform.LookAt(transform.position + cuerpoRigido.velocity);
+
+            direccion = new Direccion();
         }
 
         /// <summary>
@@ -159,12 +166,12 @@ namespace UCM.IAV.Movimiento {
         /// </summary>
         public virtual void Update()
         {
-            if (!cuerpoRigido.isKinematic)
+            if (cuerpoRigido != null)
                 return; // El movimiento será dinámico, controlado por la física y FixedUpdate
 
             // Limito la velocidad lineal antes de empezar
             if (velocidad.magnitude > velocidadMax)
-                velocidad= velocidad.normalized * velocidadMax;
+                velocidad = velocidad.normalized * velocidadMax;
 
             // Limito la velocidad angular antes de empezar
             if (rotacion > rotacionMax)
@@ -198,7 +205,8 @@ namespace UCM.IAV.Movimiento {
                 grupos.Clear();
             }
 
-            if (!cuerpoRigido.isKinematic) {
+            if (cuerpoRigido!=null)
+            {
                 return; // El movimiento será dinámico, controlado por la física y FixedUpdate
             }
 
@@ -215,10 +223,10 @@ namespace UCM.IAV.Movimiento {
             rotacion += direccion.angular * Time.deltaTime;
 
             // Opcional: Esto es para actuar con contundencia si nos mandan parar (no es muy realista)
-            if (direccion.angular == 0.0f) 
-                rotacion = 0.0f; 
-            if (direccion.lineal.sqrMagnitude == 0.0f) 
-                velocidad = Vector3.zero; 
+            if (direccion.angular == 0.0f)
+                rotacion = 0.0f;
+            if (direccion.lineal.sqrMagnitude == 0.0f)
+                velocidad = Vector3.zero;
 
             /// En cada parte tardía del tick, encarar el agente (al menos para el avatar).... si es que queremos hacer este encaramiento
             transform.LookAt(transform.position + velocidad);

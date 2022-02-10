@@ -152,7 +152,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 78873670}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 04975c86d88a65349a8c27aebc417ff7, type: 3}
   m_Name: 
@@ -384,6 +384,7 @@ GameObject:
   - component: {fileID: 635709779}
   - component: {fileID: 635709778}
   - component: {fileID: 635709777}
+  - component: {fileID: 635709781}
   m_Layer: 0
   m_Name: Amigo
   m_TagString: Untagged
@@ -398,7 +399,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 635709773}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 82e92ec8f463fd84cac92ffd22bc97c9, type: 3}
   m_Name: 
@@ -520,6 +521,21 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 635709773}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &635709781
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 635709773}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f7fb6fc9d43bc142841b9ec005ed828, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  peso: 1
+  prioridad: 1
+  objetivo: {fileID: 1021455439}
 --- !u!1 &687511467
 GameObject:
   m_ObjectHideFlags: 0
@@ -1156,9 +1172,9 @@ MonoBehaviour:
   combinarPorPrioridad: 0
   umbralPrioridad: 0.2
   velocidadMax: 15
-  rotacionMax: 360
-  aceleracionMax: 8
-  aceleracionAngularMax: 5
+  rotacionMax: 1
+  aceleracionMax: 0
+  aceleracionAngularMax: 0
   velocidad: {x: 0, y: 0, z: 0}
   rotacion: 0
   orientacion: 0
@@ -1176,7 +1192,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   peso: 1
   prioridad: 1
-  objetivo: {fileID: 0}
+  objetivo: {fileID: 1021455439}
 --- !u!1 &1613933973
 GameObject:
   m_ObjectHideFlags: 0
@@ -1385,7 +1401,7 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
-  m_IsKinematic: 1
+  m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 84
   m_CollisionDetection: 0
@@ -1429,12 +1445,12 @@ PrefabInstance:
     - target: {fileID: 7836756342179888338, guid: 140055777a6eff9409d30a04b99c394d,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.47
+      value: 0.512
       objectReference: {fileID: 0}
     - target: {fileID: 7836756342179888338, guid: 140055777a6eff9409d30a04b99c394d,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 3.5705462
+      value: -8.74
       objectReference: {fileID: 0}
     - target: {fileID: 7836756342179888338, guid: 140055777a6eff9409d30a04b99c394d,
         type: 3}
@@ -1479,7 +1495,7 @@ PrefabInstance:
     - target: {fileID: 7836756342179888339, guid: 140055777a6eff9409d30a04b99c394d,
         type: 3}
       propertyPath: m_IsKinematic
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 140055777a6eff9409d30a04b99c394d, type: 3}
@@ -1493,7 +1509,12 @@ PrefabInstance:
     - target: {fileID: -3843395283244321597, guid: f1c62ee2bf9c0014eb6d138d00e084c2,
         type: 3}
       propertyPath: rotacionMax
-      value: 360
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: -3843395283244321597, guid: f1c62ee2bf9c0014eb6d138d00e084c2,
+        type: 3}
+      propertyPath: aceleracionMax
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: -546875355526994417, guid: f1c62ee2bf9c0014eb6d138d00e084c2,
         type: 3}
@@ -1518,7 +1539,7 @@ PrefabInstance:
     - target: {fileID: 2765826974067152626, guid: f1c62ee2bf9c0014eb6d138d00e084c2,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.01
+      value: 0.045
       objectReference: {fileID: 0}
     - target: {fileID: 2765826974067152626, guid: f1c62ee2bf9c0014eb6d138d00e084c2,
         type: 3}
