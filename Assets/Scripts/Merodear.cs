@@ -29,9 +29,6 @@ namespace UCM.IAV.Movimiento
             //Sacamos la velocidad a partir de la forma vectorial de la orientacion
             result.lineal = agente.velocidadMax * transform.forward;
 
-
-
-
             //Si todavia seguimos contando
             if (temp > 0)
             {
@@ -40,8 +37,6 @@ namespace UCM.IAV.Movimiento
             //Rotamos al raton
             else
             {
-
-
                 if (Random.value < 0.5)
                 {
                     numAleatorio = -1;
@@ -71,7 +66,9 @@ namespace UCM.IAV.Movimiento
                 if (other.gameObject.layer == 3)
                 {
                     //Damos 180º a el raton
-                    transform.localEulerAngles = new Vector3(transform.rotation.x, transform.rotation.y +180, transform.rotation.z); // Flipped
+                    transform.localEulerAngles = new Vector3(transform.rotation.x, transform.rotation.y + 180, transform.rotation.z); // Flipped
+                    //agente.velocidad *= -1;
+                    //agente.rotacion += 180;
                     tempChoque = 2000;
                 }
             }

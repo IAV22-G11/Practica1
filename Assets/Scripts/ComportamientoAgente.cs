@@ -47,7 +47,12 @@ namespace UCM.IAV.Movimiento
         /// <summary>
         /// En cada tick, establecer la dirección que corresponde al agente, con peso o prioridad si se están usando
         /// </summary>
-        public virtual void Update()
+        //public virtual void Update()
+        //{
+           
+        //}
+
+        public virtual void LateUpdate()
         {
             if (agente.combinarPorPeso)
                 agente.SetDireccion(GetDireccion(), peso);
@@ -56,8 +61,6 @@ namespace UCM.IAV.Movimiento
             else
                 agente.SetDireccion(GetDireccion());
         }
-
-
         /// <summary>
         /// Devuelve la direccion calculada
         /// </summary>
