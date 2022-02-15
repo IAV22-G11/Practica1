@@ -190,7 +190,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 78873670}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5, y: 0, z: 0}
+  m_LocalPosition: {x: 3.01, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -286,7 +286,7 @@ GameObject:
   - component: {fileID: 412609108}
   - component: {fileID: 412609107}
   - component: {fileID: 412609106}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Pared
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -906,10 +906,10 @@ MonoBehaviour:
   combinarPorPeso: 0
   combinarPorPrioridad: 0
   umbralPrioridad: 0.2
-  velocidadMax: 25
-  rotacionMax: 10
-  aceleracionMax: 15
-  aceleracionAngularMax: 10
+  velocidadMax: 10
+  rotacionMax: 5
+  aceleracionMax: 10
+  aceleracionAngularMax: 5
   velocidad: {x: 0, y: 0, z: 0}
   rotacion: 0
   orientacion: 0
@@ -1067,7 +1067,7 @@ GameObject:
   - component: {fileID: 1303713795}
   - component: {fileID: 1303713794}
   - component: {fileID: 1303713793}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Pared (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1150,49 +1150,6 @@ Transform:
   m_Father: {fileID: 1059063683}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
---- !u!1 &1527219365 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7836756342179888331, guid: 140055777a6eff9409d30a04b99c394d,
-    type: 3}
-  m_PrefabInstance: {fileID: 2350887348501912222}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1527219369
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1527219365}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e27b1398245256a4aa176c4cad05e629, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  combinarPorPeso: 0
-  combinarPorPrioridad: 0
-  umbralPrioridad: 0.2
-  velocidadMax: 15
-  rotacionMax: 1
-  aceleracionMax: 0
-  aceleracionAngularMax: 0
-  velocidad: {x: 0, y: 0, z: 0}
-  rotacion: 0
-  orientacion: 0
---- !u!114 &1527219370
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1527219365}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f8521f4a63b9bdd46bf1b4021148406b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  peso: 1
-  prioridad: 1
-  objetivo: {fileID: 1021455439}
 --- !u!1 &1613933973
 GameObject:
   m_ObjectHideFlags: 0
@@ -1205,7 +1162,7 @@ GameObject:
   - component: {fileID: 1613933976}
   - component: {fileID: 1613933975}
   - component: {fileID: 1613933974}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Pared (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1300,7 +1257,7 @@ GameObject:
   - component: {fileID: 2027864851}
   - component: {fileID: 2027864850}
   - component: {fileID: 2027864849}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Pared (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1497,6 +1454,11 @@ PrefabInstance:
       propertyPath: m_IsKinematic
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8907642080060546942, guid: 140055777a6eff9409d30a04b99c394d,
+        type: 3}
+      propertyPath: objetivo
+      value: 
+      objectReference: {fileID: 1021455439}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 140055777a6eff9409d30a04b99c394d, type: 3}
 --- !u!1001 &2765826975421530708
@@ -1516,11 +1478,6 @@ PrefabInstance:
       propertyPath: aceleracionMax
       value: 3
       objectReference: {fileID: 0}
-    - target: {fileID: -546875355526994417, guid: f1c62ee2bf9c0014eb6d138d00e084c2,
-        type: 3}
-      propertyPath: objetivo
-      value: 
-      objectReference: {fileID: 1021455439}
     - target: {fileID: 2765826974067152625, guid: f1c62ee2bf9c0014eb6d138d00e084c2,
         type: 3}
       propertyPath: m_Name
@@ -1583,5 +1540,4 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2765826974067152636, guid: f1c62ee2bf9c0014eb6d138d00e084c2, type: 3}
-    - {fileID: -546875355526994417, guid: f1c62ee2bf9c0014eb6d138d00e084c2, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: f1c62ee2bf9c0014eb6d138d00e084c2, type: 3}
