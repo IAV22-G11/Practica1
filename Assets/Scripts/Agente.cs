@@ -111,6 +111,12 @@ namespace UCM.IAV.Movimiento
         /// </summary>
         public virtual void FixedUpdate()
         {
+            if (combinarPorPrioridad)
+            {
+                direccion = GetPrioridadDireccion();
+                grupos.Clear();
+            }
+
             if (cuerpoRigido == null)
                 return; // El movimiento será cinemático, fotograma a fotograma con Update
 
@@ -201,11 +207,11 @@ namespace UCM.IAV.Movimiento
         /// </summary>
         public virtual void LateUpdate()
         {
-            if (combinarPorPrioridad)
-            {
-                direccion = GetPrioridadDireccion();
-                grupos.Clear();
-            }
+            //if (combinarPorPrioridad)
+            //{
+            //    direccion = GetPrioridadDireccion();
+            //    grupos.Clear();
+            //}
 
             if (cuerpoRigido!=null)
             {

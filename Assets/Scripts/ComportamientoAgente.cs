@@ -43,6 +43,7 @@ namespace UCM.IAV.Movimiento
             agente = gameObject.GetComponent<Agente>();
         }
 
+
         /// <summary>
         /// En cada tick, establecer la dirección que corresponde al agente, con peso o prioridad si se están usando
         /// </summary>
@@ -55,6 +56,7 @@ namespace UCM.IAV.Movimiento
             else
                 agente.SetDireccion(GetDireccion());
         }
+
 
         /// <summary>
         /// Devuelve la direccion calculada
