@@ -284,7 +284,7 @@ namespace UCM.IAV.Movimiento
         private Direccion GetPrioridadDireccion()
         {
             Direccion direccion = new Direccion();
-            List<int> gIdList = new List<int>(grupos.Keys);
+             List<int> gIdList = new List<int>(grupos.Keys);
             gIdList.Sort();
             foreach (int gid in gIdList)
             {

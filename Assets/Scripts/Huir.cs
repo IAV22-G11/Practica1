@@ -70,7 +70,7 @@ namespace UCM.IAV.Movimiento
                 if (numRatas >= maxRatas)
                 {
                     //Empieza a huir
-                    llegarScript.prioridad = 0;
+                    llegarScript.prioridad = 2;
                 }
             }
         }
@@ -104,7 +104,7 @@ namespace UCM.IAV.Movimiento
                 if (numRatas < maxRatas)
                 {
                     //Entonces deja de huir
-                    llegarScript.prioridad = 2;
+                    llegarScript.prioridad = 0;
                 }
             }
         }
