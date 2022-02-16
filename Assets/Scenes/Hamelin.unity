@@ -138,7 +138,7 @@ PrefabInstance:
     - target: {fileID: 984334222163509925, guid: 140055777a6eff9409d30a04b99c394d,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 984334222163509925, guid: 140055777a6eff9409d30a04b99c394d,
         type: 3}
@@ -230,6 +230,21 @@ PrefabInstance:
       propertyPath: m_IsKinematic
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8068861532632351029, guid: 140055777a6eff9409d30a04b99c394d,
+        type: 3}
+      propertyPath: objetivo
+      value: 
+      objectReference: {fileID: 1021455439}
+    - target: {fileID: 8068861532632351029, guid: 140055777a6eff9409d30a04b99c394d,
+        type: 3}
+      propertyPath: threshold
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8068861532632351029, guid: 140055777a6eff9409d30a04b99c394d,
+        type: 3}
+      propertyPath: padreRatas
+      value: 
+      objectReference: {fileID: 1251816461}
     - target: {fileID: 8907642080060546942, guid: 140055777a6eff9409d30a04b99c394d,
         type: 3}
       propertyPath: objetivo
@@ -238,7 +253,7 @@ PrefabInstance:
     - target: {fileID: 8907642080060546942, guid: 140055777a6eff9409d30a04b99c394d,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 140055777a6eff9409d30a04b99c394d, type: 3}
@@ -662,9 +677,6 @@ MonoBehaviour:
   peso: 1
   prioridad: 1
   objetivo: {fileID: 1021455439}
-  threshold: 0
-  decayCoefficient: 0
-  padreRatas: {fileID: 0}
 --- !u!1 &687511467
 GameObject:
   m_ObjectHideFlags: 0
@@ -1071,7 +1083,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 80
+  m_Constraints: 84
   m_CollisionDetection: 0
 --- !u!135 &1021455443
 SphereCollider:
@@ -1429,7 +1441,7 @@ PrefabInstance:
     - target: {fileID: 984334222163509925, guid: 140055777a6eff9409d30a04b99c394d,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 984334222163509925, guid: 140055777a6eff9409d30a04b99c394d,
         type: 3}
@@ -1516,6 +1528,21 @@ PrefabInstance:
       propertyPath: m_IsKinematic
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8068861532632351029, guid: 140055777a6eff9409d30a04b99c394d,
+        type: 3}
+      propertyPath: objetivo
+      value: 
+      objectReference: {fileID: 1021455439}
+    - target: {fileID: 8068861532632351029, guid: 140055777a6eff9409d30a04b99c394d,
+        type: 3}
+      propertyPath: threshold
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8068861532632351029, guid: 140055777a6eff9409d30a04b99c394d,
+        type: 3}
+      propertyPath: padreRatas
+      value: 
+      objectReference: {fileID: 1251816461}
     - target: {fileID: 8907642080060546942, guid: 140055777a6eff9409d30a04b99c394d,
         type: 3}
       propertyPath: objetivo
@@ -1524,7 +1551,7 @@ PrefabInstance:
     - target: {fileID: 8907642080060546942, guid: 140055777a6eff9409d30a04b99c394d,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 140055777a6eff9409d30a04b99c394d, type: 3}
@@ -1688,7 +1715,7 @@ PrefabInstance:
     - target: {fileID: 984334222163509925, guid: 140055777a6eff9409d30a04b99c394d,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 984334222163509925, guid: 140055777a6eff9409d30a04b99c394d,
         type: 3}
@@ -1780,6 +1807,21 @@ PrefabInstance:
       propertyPath: m_IsKinematic
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8068861532632351029, guid: 140055777a6eff9409d30a04b99c394d,
+        type: 3}
+      propertyPath: objetivo
+      value: 
+      objectReference: {fileID: 1021455439}
+    - target: {fileID: 8068861532632351029, guid: 140055777a6eff9409d30a04b99c394d,
+        type: 3}
+      propertyPath: threshold
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8068861532632351029, guid: 140055777a6eff9409d30a04b99c394d,
+        type: 3}
+      propertyPath: padreRatas
+      value: 
+      objectReference: {fileID: 1251816461}
     - target: {fileID: 8907642080060546942, guid: 140055777a6eff9409d30a04b99c394d,
         type: 3}
       propertyPath: objetivo
@@ -1788,7 +1830,7 @@ PrefabInstance:
     - target: {fileID: 8907642080060546942, guid: 140055777a6eff9409d30a04b99c394d,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 140055777a6eff9409d30a04b99c394d, type: 3}

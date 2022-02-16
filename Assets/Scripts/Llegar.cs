@@ -2,7 +2,6 @@ using UnityEngine;
 
 namespace UCM.IAV.Movimiento
 {
-
     /// <summary>
     /// Clase para modelar el comportamiento de Llegar a otro agente
     /// </summary>
@@ -10,25 +9,6 @@ namespace UCM.IAV.Movimiento
     {
         float radius = 2;
         float timeToTarget = 0.25f;
-
-        //Para que las ratas formen
-        public float threshold;
-        private float thresholdAux; //Se usa para evitar que haga calculos de la misma rata
-        public float decayCoefficient;
-
-        private float strength;
-        private float distance;
-
-        public GameObject padreRatas;
-        Transform[] tRatas;
-
-        private void Start()
-        {
-            //Cogemos la posicion de todas las ratas
-            tRatas = padreRatas.GetComponentsInChildren<Transform>();
-        }
-
-
 
         /// <summary>
         /// Obtiene la dirección
@@ -56,27 +36,6 @@ namespace UCM.IAV.Movimiento
                     result.lineal *= agente.velocidadMax;
                 }
             }
-
-
-            ////Si son las ratas...
-            //if (this.gameObject.GetComponent<Merodear>() != null)
-            //{
-            //    foreach (Transform trans in tRatas)
-            //    {
-            //        distance = (trans.position - transform.position).magnitude;
-            //        if (distance < threshold && distance > thresholdAux)
-            //        {
-            //            //Calculate the strength of repulsion
-            //            //here using the inverse square law
-            //            strength = Mathf.Min(decayCoefficient / (distance * distance), agente.aceleracionMax);
-
-            //            //Add the acceleration.
-            //            result.lineal.Normalize();
-            //            result.lineal += strength * result.lineal;
-            //        }
-            //    }
-            //}
-
             return result;
 
         }

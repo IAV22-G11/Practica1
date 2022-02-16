@@ -10,10 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 7836756342179888338}
   - component: {fileID: 7836756342179888339}
-  - component: {fileID: 3487858929298508822}
   - component: {fileID: 5268745807152142495}
   - component: {fileID: 8907642080060546942}
   - component: {fileID: 984334222163509925}
+  - component: {fileID: 6617936358374272040}
+  - component: {fileID: 8068861532632351029}
   m_Layer: 6
   m_Name: Rata
   m_TagString: Untagged
@@ -52,19 +53,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &3487858929298508822
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7836756342179888331}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.24280834, y: 0.5087302, z: 0.63323045}
-  m_Center: {x: -0.032357693, y: -0.24563491, z: 0.005824685}
 --- !u!114 &5268745807152142495
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -117,8 +105,37 @@ MonoBehaviour:
   peso: 1
   prioridad: 2
   objetivo: {fileID: 0}
-  threshold: 2
-  decayCoefficient: 0.5
+--- !u!135 &6617936358374272040
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7836756342179888331}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.40686047
+  m_Center: {x: 0, y: -0.09313953, z: 0}
+--- !u!114 &8068861532632351029
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7836756342179888331}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1437d2ab1c10c641809e784bb99aae8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  peso: 1
+  prioridad: 1
+  objetivo: {fileID: 0}
+  maxAcceleration: 5
+  threshold: 3
+  decayCoefficient: 5
   padreRatas: {fileID: 0}
 --- !u!1 &7836756342244075787
 GameObject:
