@@ -68,6 +68,8 @@ namespace UCM.IAV.Movimiento
                 //Reiniciamos la escena
                 SceneManager.LoadScene("Hamelin");
             }
+            else if (Input.GetKeyDown(KeyCode.Escape))
+                Application.Quit();
         }
 
         private void OnTriggerStay(Collider other)

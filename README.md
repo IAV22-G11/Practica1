@@ -72,9 +72,13 @@ result.velocity = target.position - character.position
 
 El script de Huida es igual que el de Llegar, salvo que result.velocity = character.position - target.position
 
-Estos dos sccripts constituyen la inteligencia artificial del perro, incluyendo otro mecanismo que detecta cuantas ratas estan cerca suya para detectar los momentos en los que tiene que huir y en los que tiene que intentar llegar a su destino. Por otra parte se tiene en cuenta cuando el perro empieza a huir para que no empiece a perseguir justo después y realice un comportamiento extraño en el cual parece que está en continuo movimiento errático.
+Estos dos sccripts constituyen la inteligencia artificial del perro, incluyendo otro mecanismo que detecta cuantas ratas estan cerca suya para detectar los momentos en 
+los que tiene que huir y en los que tiene que intentar llegar a su destino. Por otra parte se tiene en cuenta cuando el perro empieza a huir para que no empiece a perseguir 
+justo después y realice un comportamiento extraño en el cual parece que está en continuo movimiento errático.
 
-Para las ratas se utiliza también el comportamiento llegar mientras el jugador esté lo suficientemente cerca tocando la flauta. Esta cercanía se determinará comprobando la distancia de la rata al flautista y comprobando si el jugador esta tocando o no. Además, se emplea otro script Separación que previene que las ratas se junten demasiado entre si cuando estan persiguiendo al flautista. Este último comportamiento también está inspirado en el libro de Millington.
+Para las ratas se utiliza también el comportamiento llegar mientras el jugador esté lo suficientemente cerca tocando la flauta. Esta cercanía se determinará comprobando la 
+distancia de la rata al flautista y comprobando si el jugador esta tocando o no. Además, se emplea otro script Separación que previene que las ratas se junten demasiado entre 
+si cuando estan persiguiendo al flautista. Este último comportamiento también está inspirado en el libro de Millington.
 
 Este comportamiento se encarga de mantener esa distancia entre ratas, siendo direction la distancia que hay entre la rata mas cercana y la rata en cuestión:
 
@@ -91,7 +95,9 @@ if distance < threshold:
 
 En cuanto al merodeo errático de las ratas utilizamos la clase KinematicWander de Millington pero con algunas variaciones:
 
-Este código permite que las ratas se muevan de manera aleatoria. Las ratas se mueven hacia delante mientras no hayan chocado contra una pared. Durante este movimiento utilizamos un contador temp que controla que las ratas no tengan un objetivo aleatorio de rotacion todo el rato, sino que solo decidan tomar una nueva rotacion despues de unos segundos:
+Este código permite que las ratas se muevan de manera aleatoria. Las ratas se mueven hacia delante mientras no hayan chocado contra una pared. Durante este movimiento 
+utilizamos un contador temp que controla que las ratas no tengan un objetivo aleatorio de rotacion todo el rato, sino que solo decidan tomar una nueva rotacion despues 
+de unos segundos:
 
  # Sacamos la velocidad a partir de la forma vectorial de la orientacion
    result.lineal = agente.velocidadMax * transform.forward;
@@ -127,4 +133,10 @@ result.lineal *= agente.aceleracionMax;
  # agente.rotacion += 180;
 tempChoque = 2000;
 
-Como debilidades principales esta implementación presenta un comportamiento un tanto dudoso en las ratas que al llegar a su objetivo de persecución, con tal de mantenerse lo más cerca posible del jugador y mantener cierta distancia, estas siempre se encuentran en movimiento oscilando entre la persecución y la separación. Si quisieramos dejar a un lado esta optimalidad en cuanto a distancia para hacer un comportamiento más realista podríamos implementar un cierto radio de margen en el cual no resume la persecución hasta que no salga de él. Decidimos no tomar esta via ya que para el propósito de esta prática preferiamos un comportamiento más crudo y óptimo a uno mas natural.
+Modificamos el kinematicWander para que en vez de escoger entre izquierda o derecha pudiera también escoger entre todo el rango intermedio, así el movimiento luce más aleatorio
+de deambular. También para ser más eficientes hicimos los choques con la pared mediante capas de colisiones para que no lo comprobara cada vez que se choquen con otras ratas o el perro.
+
+Como debilidades principales esta implementación presenta un comportamiento un tanto dudoso en las ratas que al llegar a su objetivo de persecución, 
+con tal de mantenerse lo más cerca posible del jugador y mantener cierta distancia, estas siempre se encuentran en movimiento oscilando entre la persecución y la separación.
+Si quisieramos dejar a un lado esta optimalidad en cuanto a distancia para hacer un comportamiento más realista podríamos implementar un cierto radio de margen en el cual no 
+resume la persecución hasta que no salga de él. Decidimos no tomar esta via ya que para el propósito de esta prática preferiamos un comportamiento más crudo y óptimo a uno mas natural.

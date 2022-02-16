@@ -88,7 +88,7 @@ namespace UCM.IAV.Movimiento
                 {
                     //Empieza a huir
                     llegarScript.prioridad = 2;
-                    timer = 3000;
+                    timer = 1200;
                     llegarScript.cambiaPerseguir(false);
                 }
             }
