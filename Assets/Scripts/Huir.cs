@@ -65,6 +65,8 @@ namespace UCM.IAV.Movimiento
             {
                 //Se suma el numero de ratas
                 numRatas++;
+                UnityEngine.Debug.Log("ENTRO" + numRatas);
+
 
                 //Si hay demasiadas ratas...
                 if (numRatas >= maxRatas)
@@ -99,6 +101,7 @@ namespace UCM.IAV.Movimiento
             {
                 //Se resta el numero de ratas
                 numRatas--;
+                UnityEngine.Debug.Log("SALGO" + numRatas);
 
                 //Si hay menos ratas...
                 if (numRatas < maxRatas)

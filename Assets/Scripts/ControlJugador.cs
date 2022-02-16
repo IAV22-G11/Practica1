@@ -16,8 +16,9 @@ namespace UCM.IAV.Movimiento
     /// <summary>
     /// Clara para el comportamiento de agente que consiste en ser el jugador
     /// </summary>
-    public class ControlJugador: ComportamientoAgente
+    public class ControlJugador : ComportamientoAgente
     {
+        bool tocaFlauta = false;
         /// <summary>
         /// Obtiene la dirección
         /// </summary>
@@ -34,5 +35,43 @@ namespace UCM.IAV.Movimiento
 
             return direccion;
         }
+
+        private void Update()
+        {
+            //Si pulsas el espacio
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                //Se activa el trigger de la flauta
+                tocaFlauta = true;
+            }
+            //Si deja de tocarlo...
+            else if (Input.GetKeyUp(KeyCode.Space))
+            {
+                //Se desactiva
+                tocaFlauta = false;
+            }
+        }
+
+        private void OnTriggerStay(Collider other)
+        {
+            if (other.GetComponent<Merodear>() != null)
+            {
+                //Si toca la flauta..
+                if (tocaFlauta)
+                {
+                    //Cambiamos la prioridad para que las ratas se acerquen
+                    other.GetComponent<Merodear>().prioridad = 2;
+                    other.GetComponent<Llegar>().prioridad = 1;
+                }
+                else
+                {
+                    //Cambiamos la prioridad para que las ratas se acerquen
+                    other.GetComponent<Merodear>().prioridad = 1;
+                    other.GetComponent<Llegar>().prioridad = 2;
+                }
+            }
+        }
+
+
     }
 }
