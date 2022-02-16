@@ -52,75 +52,79 @@ funciones de IA.
 
 El otro script destacable que nos queda por comentar es el de ControlJugador que hereda de ComportamientoAgente y permite el control del flautista por parte del jugador.
 
-**Comportamientos a añadir**
+**Solución implementada**
 
-El script de Llegar va a ser implementado igual que en el libro de IA for games de Millington:
+AI for games Third Edition by Ian Millington
 
-class KinematicArrive:
-character: Static
-target: Static
+El script de Llegar, utilizado tanto por el perro como por las ratas emplea un algoritmo explicado en el libro AI for games Third Edition de Ian Millington, el cuál es el principal referente empleado en esta práctica.
 
-maxSpeed: float
+El código de este script realizará un acercamiento del agente si este se encuentra demasiado lejos del objetivo, sino no se realizará movimiento por parte de este script.
 
-# The satisfaction radius.
-radius: float
-
-# The time to target constant.
-timeToTarget: float = 0.25
-
-function getSteering() -> KinematicSteeringOutput:
-result = new KinematicSteeringOutput()
-
-# Get the direction to the target.
-result.velocity = target.position - character.position
-
-# Check if we’re within radius.
+Comprobación de distancia realizada:
+ # Check if we’re within radius.
 if result.velocity.length() < radius:
 	# Request no steering.
 	return null
 
-# We need to move to our target, we’d like to
-# get there in timeToTarget seconds.
-result.velocity /= timeToTarget
-
-# If this is too fast, clip it to the max speed.
-if result.velocity.length() > maxSpeed:
-	result.velocity.normalize()
-	result.velocity *= maxSpeed
-
-# Face in the direction we want to move.
-character.orientation = newOrientation(
-character.orientation,
-result.velocity)
-
-result.rotation = 0
-return result
-
-Estamos planteando como pequeño añadido incluir otro radio algo más grande que el introducido por Millington que permita que una vez realizada la llegada por parte del agente este no vuelva a intentar acercarse hasta salir de este nuevo radio, permitiendo un comportamiento mas natural.
+Obtención del movimiento y acercamiento:
+ # Get the direction to the target.
+result.velocity = target.position - character.position
 
 El script de Huida es igual que el de Llegar, salvo que result.velocity = character.position - target.position
 
-Estos dos sccripts constituiran la inteligencia artificial del perro, incluyendo otro mecanismo que detecte cuantas ratas estan cerca suya para detectar los momentos en los que tiene que huir y en los que tiene que intentar llegar a su destino.
+Estos dos sccripts constituyen la inteligencia artificial del perro, incluyendo otro mecanismo que detecta cuantas ratas estan cerca suya para detectar los momentos en los que tiene que huir y en los que tiene que intentar llegar a su destino. Por otra parte se tiene en cuenta cuando el perro empieza a huir para que no empiece a perseguir justo después y realice un comportamiento extraño en el cual parece que está en continuo movimiento errático.
 
-Para las ratas se utilizará también el comportamiento llegar mientras el jugador este lo suficientemente cerca tocando la flauta. Esta cercanía se determinará comprobando la distancia de la rata al flautista y comprobando si el jugador esta tocando o no.
+Para las ratas se utiliza también el comportamiento llegar mientras el jugador esté lo suficientemente cerca tocando la flauta. Esta cercanía se determinará comprobando la distancia de la rata al flautista y comprobando si el jugador esta tocando o no. Además, se emplea otro script Separación que previene que las ratas se junten demasiado entre si cuando estan persiguiendo al flautista. Este último comportamiento también está inspirado en el libro de Millington.
 
-En cuanto al merodeo errático de las ratas utilizaremos tambien la clase KinematicWander de Millington:
+Este comportamiento se encarga de mantener esa distancia entre ratas, siendo direction la distancia que hay entre la rata mas cercana y la rata en cuestión:
 
-class KinematicWander:
-character: Static
-maxSpeed: float
+if distance < threshold:
+    # Calculate the strength of repulsion
+    # here using the inverse square law
+      strength = Mathf.Min(
+      decayCoefficient / (distance * distance),
+      agente.aceleracionMax);
 
-# The maximum rotation speed we’d like, probably should be smaller
-# than the maximum possible, for a leisurely change in direction.
-maxRotation: float
+    # Add the acceleration.
+      direction.Normalize();
+      result.lineal += strength * direction;
 
-function getSteering() -> KinematicSteeringOutput:
-result = new KinematicSteeringOutput()
+En cuanto al merodeo errático de las ratas utilizamos la clase KinematicWander de Millington pero con algunas variaciones:
 
-# Get velocity from the vector form of the orientation.
-result.velocity = maxSpeed * character.orientation.asVector()
+Este código permite que las ratas se muevan de manera aleatoria. Las ratas se mueven hacia delante mientras no hayan chocado contra una pared. Durante este movimiento utilizamos un contador temp que controla que las ratas no tengan un objetivo aleatorio de rotacion todo el rato, sino que solo decidan tomar una nueva rotacion despues de unos segundos:
 
-# Change our orientation randomly.
-result.rotation = randomBinomial() * maxRotation
+ # Sacamos la velocidad a partir de la forma vectorial de la orientacion
+   result.lineal = agente.velocidadMax * transform.forward;
 
-return result
+ # Si todavia seguimos contando
+   if temp > 0
+      temp -= Time.time;
+   # Rotamos al raton
+   else
+   		if Random.value < 0.5
+           	numAleatorio = -1;
+     	else
+            numAleatorio = 1;
+
+        rotation = numAleatorio * agente.rotacionMax * Random.value;
+
+      # Ponemos un random entre 1 y 5 a temp
+        temp = Random.Range(200, 1000);
+
+ # Con random value hacemos que en vez de rotar X o -X rote tambien en los valores intermedios
+   result.angular = rotation;
+
+   tempChoque -= Time.time;
+
+Si la rata se choca contra una pared, esta dejará de moverse aleatoriamente mientras se encuentre en colisión y en vez de eso procederá a alejarse de la pared con la que ha colisionado:
+
+result.lineal = transform.position - other.transform.position;
+result.lineal.Normalize();
+result.lineal *= agente.aceleracionMax;
+ # Damos 180º a el raton
+ # transform.localEulerAngles = new Vector3(transform.rotation.x, transform.rotation.y + 180, transform.rotation.z); // Flipped
+ # agente.velocidad *= -1;
+ # agente.rotacion += 180;
+tempChoque = 2000;
+
+Como debilidades principales esta implementación presenta un comportamiento un tanto dudoso en las ratas que al llegar a su objetivo de persecución, con tal de mantenerse lo más cerca posible del jugador y mantener cierta distancia, estas siempre se encuentran en movimiento oscilando entre la persecución y la separación. Si quisieramos dejar a un lado esta optimalidad en cuanto a distancia para hacer un comportamiento más realista podríamos implementar un cierto radio de margen en el cual no resume la persecución hasta que no salga de él. Decidimos no tomar esta via ya que para el propósito de esta prática preferiamos un comportamiento más crudo y óptimo a uno mas natural.
