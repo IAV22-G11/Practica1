@@ -9,6 +9,12 @@ namespace UCM.IAV.Movimiento
     {
         float radius = 2;
         float timeToTarget = 0.25f;
+        bool puedePerseguir = true;
+
+        public void cambiaPerseguir(bool cambia)
+        {
+            puedePerseguir = cambia;
+        }
 
         /// <summary>
         /// Obtiene la dirección
@@ -17,23 +23,29 @@ namespace UCM.IAV.Movimiento
         public override Direccion GetDireccion()
         {
             Direccion result = new Direccion();
-            result.lineal = objetivo.transform.position - transform.position;
 
-            //Si ya hemos llegado se para de mover
-            if (result.lineal.magnitude < radius)
+            if (puedePerseguir)
             {
-                result.lineal = new Vector3();
-            }
-            else
-            {
-                //Para llegar al objetivo en timeTotarget segundos
-                result.lineal /= timeToTarget;
 
-                //Comprobamos que no pase de la velocidad máxima
-                if (result.lineal.magnitude > agente.velocidadMax)
+
+                result.lineal = objetivo.transform.position - transform.position;
+
+                //Si ya hemos llegado se para de mover
+                if (result.lineal.magnitude < radius)
                 {
-                    result.lineal.Normalize();
-                    result.lineal *= agente.velocidadMax;
+                    result.lineal = new Vector3();
+                }
+                else
+                {
+                    //Para llegar al objetivo en timeTotarget segundos
+                    result.lineal /= timeToTarget;
+
+                    //Comprobamos que no pase de la velocidad máxima
+                    if (result.lineal.magnitude > agente.velocidadMax)
+                    {
+                        result.lineal.Normalize();
+                        result.lineal *= agente.velocidadMax;
+                    }
                 }
             }
             return result;

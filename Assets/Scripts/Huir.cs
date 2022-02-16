@@ -8,6 +8,8 @@
    Autor: Federico Peinado 
    Contacto: email@federicopeinado.com
 */
+using UnityEngine;
+
 namespace UCM.IAV.Movimiento
 {
 
@@ -25,10 +27,25 @@ namespace UCM.IAV.Movimiento
         [UnityEngine.SerializeField]
         int maxRatas = 3;
 
+        //Con esto hacemos que cuando empiece a huir se vaya unos segundos para que no se esté chocando continuamente con el trigger
+        float timer = 0;
+        
         private void Start()
         {
             llegarScript = GetComponent<Llegar>();
             centroRatas = UnityEngine.Vector3.zero;
+        }
+
+        private void Update()
+        {
+            if (timer > 0)
+            {
+                timer -= Time.time;
+            }
+            else
+            {
+                llegarScript.cambiaPerseguir(true);
+            }
         }
 
         /// <summary>
@@ -71,6 +88,8 @@ namespace UCM.IAV.Movimiento
                 {
                     //Empieza a huir
                     llegarScript.prioridad = 2;
+                    timer = 1200;
+                    llegarScript.cambiaPerseguir(false);
                 }
             }
         }
@@ -104,6 +123,7 @@ namespace UCM.IAV.Movimiento
                 {
                     //Entonces deja de huir
                     llegarScript.prioridad = 0;
+
                 }
             }
         }
