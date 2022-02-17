@@ -54,21 +54,25 @@ El otro script destacable que nos queda por comentar es el de ControlJugador que
 
 **Solución implementada**
 
-AI for games Third Edition by Ian Millington
-
 El script de Llegar, utilizado tanto por el perro como por las ratas emplea un algoritmo explicado en el libro AI for games Third Edition de Ian Millington, el cuál es el principal referente empleado en esta práctica.
 
 El código de este script realizará un acercamiento del agente si este se encuentra demasiado lejos del objetivo, sino no se realizará movimiento por parte de este script.
 
 Comprobación de distancia realizada:
+
+```
  # Check if we’re within radius.
 if result.velocity.length() < radius:
 	# Request no steering.
 	return null
+```
 
 Obtención del movimiento y acercamiento:
+
+```
  # Get the direction to the target.
 result.velocity = target.position - character.position
+```
 
 El script de Huida es igual que el de Llegar, salvo que result.velocity = character.position - target.position
 
@@ -82,6 +86,7 @@ si cuando estan persiguiendo al flautista. Este último comportamiento también 
 
 Este comportamiento se encarga de mantener esa distancia entre ratas, siendo direction la distancia que hay entre la rata mas cercana y la rata en cuestión:
 
+```
 if distance < threshold:
     # Calculate the strength of repulsion
     # here using the inverse square law
@@ -92,6 +97,7 @@ if distance < threshold:
     # Add the acceleration.
       direction.Normalize();
       result.lineal += strength * direction;
+```
 
 En cuanto al merodeo errático de las ratas utilizamos la clase KinematicWander de Millington pero con algunas variaciones:
 
@@ -99,6 +105,7 @@ Este código permite que las ratas se muevan de manera aleatoria. Las ratas se m
 utilizamos un contador temp que controla que las ratas no tengan un objetivo aleatorio de rotacion todo el rato, sino que solo decidan tomar una nueva rotacion despues 
 de unos segundos:
 
+```
  # Sacamos la velocidad a partir de la forma vectorial de la orientacion
    result.lineal = agente.velocidadMax * transform.forward;
 
@@ -121,9 +128,11 @@ de unos segundos:
    result.angular = rotation;
 
    tempChoque -= Time.time;
+```
 
 Si la rata se choca contra una pared, esta dejará de moverse aleatoriamente mientras se encuentre en colisión y en vez de eso procederá a alejarse de la pared con la que ha colisionado:
 
+```
 result.lineal = transform.position - other.transform.position;
 result.lineal.Normalize();
 result.lineal *= agente.aceleracionMax;
@@ -132,6 +141,7 @@ result.lineal *= agente.aceleracionMax;
  # agente.velocidad *= -1;
  # agente.rotacion += 180;
 tempChoque = 2000;
+```
 
 Modificamos el kinematicWander para que en vez de escoger entre izquierda o derecha pudiera también escoger entre todo el rango intermedio, así el movimiento luce más aleatorio
 de deambular. También para ser más eficientes hicimos los choques con la pared mediante capas de colisiones para que no lo comprobara cada vez que se choquen con otras ratas o el perro.
@@ -140,3 +150,7 @@ Como debilidades principales esta implementación presenta un comportamiento un 
 con tal de mantenerse lo más cerca posible del jugador y mantener cierta distancia, estas siempre se encuentran en movimiento oscilando entre la persecución y la separación.
 Si quisieramos dejar a un lado esta optimalidad en cuanto a distancia para hacer un comportamiento más realista podríamos implementar un cierto radio de margen en el cual no 
 resume la persecución hasta que no salga de él. Decidimos no tomar esta via ya que para el propósito de esta prática preferiamos un comportamiento más crudo y óptimo a uno mas natural.
+
+**Referencias**
+
+AI for games Third Edition by Ian Millington
